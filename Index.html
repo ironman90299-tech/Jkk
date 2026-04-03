@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Message</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(to right, #ffdde1, #ee9ca7);
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .box {
+        margin-top: 20%;
+        background: rgba(255,255,255,0.2);
+        padding: 30px;
+        border-radius: 20px;
+        display: inline-block;
+        backdrop-filter: blur(10px);
+    }
+
+    h1 {
+        color: white;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .yes { background: #28a745; color: white; }
+    .no { background: #dc3545; color: white; }
+
+    .hidden { display: none; }
+
+    .flower {
+        position: absolute;
+        font-size: 24px;
+        animation: fall 6s linear infinite;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-10vh); opacity: 1; }
+        100% { transform: translateY(100vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="question" class="box">
+    <h1>📩 Open a mail?</h1>
+    <button class="yes" onclick="showMessage()">Yes</button>
+    <button class="no" onclick="showNo()">No</button>
+</div>
+
+<div id="noMessage" class="box hidden">
+    <h1>😄 You have to see!</h1>
+</div>
+
+<div id="finalMessage" class="box hidden">
+    <h1>✨ Happy Good Friday Madhu ❤️</h1>
+    <p>🌸 Grateful to have you as my friend 🌸</p>
+</div>
+
+<script>
+function showMessage() {
+    document.getElementById("question").classList.add("hidden");
+    document.getElementById("finalMessage").classList.remove("hidden");
+    startFlowers();
+}
+
+function showNo() {
+    document.getElementById("question").classList.add("hidden");
+    document.getElementById("noMessage").classList.remove("hidden");
+
+    setTimeout(() => {
+        document.getElementById("noMessage").classList.add("hidden");
+        document.getElementById("finalMessage").classList.remove("hidden");
+        startFlowers();
+    }, 2000);
+}
+
+function startFlowers() {
+    setInterval(() => {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = "🌸";
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(flower);
+
+        setTimeout(() => flower.remove(), 6000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
